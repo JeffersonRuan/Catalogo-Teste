@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.cabecalho {
+    background-color: #04049E;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.titulo {
+    color: #FFFFFF;
+    font-weight: bolder;
+    font-size: 30px;
+}
+
+.barraPesquisa{
+    border-radius: 10px;
+    width: 400px;
+    height: 35px;
+    margin: 5px 5px;
+}
+
+.opcoes {
+    margin-right: 20px;
+    color: #FFFFFF;
+    font-weight: bolder;
+    transition: 0.3s;
+}
+
+.opcoes:hover {
+    color: #000000;
+}
+
+
+
+/* Formulários */
+
+.formulario {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.form-container {
+    background-color: #fafafa;
+    border-radius: 14px;
+    margin: 14px;
+    max-width: 700px;
+    width: 100%;
+    box-sizing: 0 3px 5px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.header {
+    background: linear-gradient(120deg, #8bb0ff 0%, #040491 100%);
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    font-weight: bolder;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.header:hover {
+    color: #000000;
+}
+
+.form {
+    padding: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 18px;
+
+}
+
+.form-content label {
+    display: inline-block;
+    margin-bottom: 4px;
+    font-size: 12px;
+    font-weight: bolder;
+}
+
+#codigo {
+    width: 100px;
+}
+
+#nome {
+    width: 500px;
+}
+
+#descricao {
+    width: 660px;
+}
+
+
+.form-content input {
+    border-radius: 8px;
+    padding: 5px;
+    border: 2px solid #dfdfdf;
+}
+
+
+
+.form-content a{
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    visibility: hidden;
+}
+
+.form button {
+    background-color: #040491;
+    color: #fff;
+    width: 30%;
+    padding: 5px;
+    border-radius: 8px;
+    margin-top: 14px;
+    align-self: center;
+}
+
+.form-content.error input{
+    border-color: #ff3b25;
+}
+
+.form-content.error a{
+    color: #ff3b25;
+}
