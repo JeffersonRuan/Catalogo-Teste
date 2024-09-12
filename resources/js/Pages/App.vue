@@ -96,6 +96,7 @@ import Cabecalho from '../Components/Cabecalho.vue';
             <a href="/produtos" class="opcoes">Produtos</a>
             <a href="/fornecedores" class="opcoes">Fornecedores</a>
         </div>
+        <a href="/login" class="opcoes">Login</a>
     </div>
 
 <!-- body -->

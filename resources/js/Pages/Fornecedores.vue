@@ -17,6 +17,7 @@ import Cabecalho from '../Components/Cabecalho.vue';
     const ativarAlterFornecedor = ref(false);
     const ativarDeleteFornecedor = ref(false);
     const ativarListaFornecedor = ref(false);
+    const token = localStorage.getItem('authToken');
 
 //Funções
 
@@ -35,7 +36,7 @@ import Cabecalho from '../Components/Cabecalho.vue';
             }
 
         } catch (error){
-            alert('Erro ao salvar o fornecedor!');
+            alert('Erro ao salvar o fornecedor!', error);
         }
     }
 

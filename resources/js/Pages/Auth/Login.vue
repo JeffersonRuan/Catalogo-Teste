@@ -29,27 +29,17 @@ const submit = async () => {
             onFinish: () => form.reset('password'),
         });
 
-        await login();
     } catch (error) {
         console.error('Erro ao fazer login:', error);
     }
-    
-    //     form.post(route('login'), {
-    //         onFinish: () => form.reset('password'),
-    // });
 };
 
-const login = async () => {
-    try{
-        const response = await axios.post('/api/login', {
-            email: form.email,
-            password: form.password,
-        });
-
-        const token = response.data.token;
-        localStorage.setItem('authToken', token);
+const logout = async () => {
+    try {
+        await axios.post('/api/logout');
+        
     } catch (error) {
-        console.error('Erro ao fazer login:', error);
+        console.error('Erro ao fazer logout:', error);
     }
 }
 
