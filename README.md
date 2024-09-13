@@ -1,6 +1,6 @@
 Catalógo Virtual - Novo Mundo
 
-Este projeto foi desenvolvido para servir de avaliação ao teste para Desenvolvedor Junior da Novo Mundo, utilizando Laravel 11, Laravel Breeze com Vue.js 3 para o frontend e o Laravel Sanctum para a autenticação utilizando o tipo SPA. O banco de dados utilizado foi o SQLite, integrado diretamente na aplicação.
+Este projeto foi desenvolvido como avaliação para o teste de Desenvolvedor Júnior da Novo Mundo, utilizando Laravel 11, Laravel Breeze com Vue.js 3 para o frontend e Laravel Sanctum para a autenticação do tipo SPA. O banco de dados utilizado foi o SQLite, integrado diretamente à aplicação.
 
 Pré-requisitos
 
@@ -26,7 +26,7 @@ Dentro do diretório do projeto, instale as dependências do Laravel: composer i
 
 3. Instale as Dependências do Frontend
 
-Dentro do diretório do projeto, instale as dependências do frontend utilizando o NPM: npm install 
+Dentro do diretório do projeto, instale as dependências do Frontend utilizando o NPM: npm install 
 
 4. Configuração do Arquivo .env
 
@@ -63,6 +63,17 @@ Você também pode acessar as rotas de autenticação padrões que são:
 http://localhost:8000/login
 http://localhost:8000/register
 
+Testes
+
+Para fazer qualquer alteração em produtos e fornecedores, é necessário realizar o login, disponível no canto superior direito da página.
+
+Só é possível cadastrar um produto caso exista um fornecedor.
+
+Para criar novos fornecedores, acesse a aba "Fornecedores" e selecione a opção "Adicionar Fornecedor". Nessa aba, é possível cadastrar, alterar, deletar e listar todos os fornecedores existentes no banco de dados.
+
+Após a criação dos fornecedores, é possível cadastrar novos produtos na aba "Produtos", preenchendo os campos código, nome, descrição, preço e código do fornecedor. Nessa aba, também é possível cadastrar, alterar e deletar produtos.
+
+Na página principal, os produtos serão listados automaticamente, e é possível realizar pesquisas por código e nome, além de filtrar por código de fornecedor e preço.
 
 Construido com
 
@@ -75,9 +86,9 @@ SQLite (banco de dados)
 
 Expressões de gratidão
 
-Esse projeto surgiu como uma oportunidade para avaliar meus conhecimentos técnicos e capacidade de entregar um solução funcional e de qualidade. Tive um grande aprendizado vendo na prática como o departamento de desenvolvimento atua, conhecendo as ferramentas e o ambiente, além de conhecer pessoas incríveis que trabalham na área.
+Esse projeto surgiu como uma oportunidade para avaliar meus conhecimentos técnicos e minha capacidade de entregar uma solução funcional e de qualidade. Tive um grande aprendizado ao ver na prática como o departamento de desenvolvimento atua, conhecendo as ferramentas e o ambiente, além de conhecer pessoas incríveis que trabalham na área.
 
-Agradeço imensamente a oportunidade e espero ter entregue as espectativas!
+Agradeço imensamente pela oportunidade e espero ter atendido às expectativas!
 
 por Jefferson Ruan.
 
