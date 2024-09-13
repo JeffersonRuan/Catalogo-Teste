@@ -25,13 +25,10 @@ const form = useForm({
 
 const submit = async () => {  
     try{
-        await form.post(route('login'), {
-            onFinish: () => {
-                form.reset('password');
-                window.location.href = '/';
-            }
-        });
-    } catch (error) {
+        const response = await form.post(route('login'), {
+            onFinish: () =>  form.reset('password')
+            });
+        } catch (error) {
         console.error('Erro ao fazer login:', error);
     }
 };
@@ -122,7 +119,7 @@ const logout = async () => {
     text-decoration-line: underline;
     font-size: 0.875rem;
     line-height: 1.25rem;
-    color: rgb(75 85 99)
+    color: rgb(75 85 99);
 }
 
 </style>

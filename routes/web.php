@@ -7,7 +7,7 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('App');
-});
+})->name('catalogo');
 
 Route::get('/produtos', function () {
     return Inertia::render('Produtos');
