@@ -1,6 +1,6 @@
 <script setup>
 import axios from 'axios';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 import { Head } from '@inertiajs/vue3';
 import Cabecalho from '../Components/Cabecalho.vue';
 
@@ -14,6 +14,7 @@ import Cabecalho from '../Components/Cabecalho.vue';
     const pesquisa = ref('');  
     const listaAtiva = ref(true);
     const filtroAtivo = ref(false);
+    const estaAutenticado = ref(false);
 
 //Funções
 
@@ -62,6 +63,25 @@ import Cabecalho from '../Components/Cabecalho.vue';
         }
     }
 
+//Login / Logout
+
+    axios.get('api/auth/check').then(response => {
+        estaAutenticado.value = response.data.authenticated;
+    });
+
+    const authText = computed(() => estaAutenticado.value ? 'Logout' : 'Login');
+    
+    const authAction = () => {
+        if(estaAutenticado.value){
+            axios.post('/api/logout').then(() => {
+                estaAutenticado.value = false;
+                alert('Logout realizado!');
+            });
+        } else {
+            window.location.href = '/login';
+        }
+    }
+
 //Exibição dinâmica da página    
     const toggleFiltro = () => {
         filtroAtivo.value = !filtroAtivo.value;
@@ -73,8 +93,8 @@ import Cabecalho from '../Components/Cabecalho.vue';
         precoMax.value = "";
         pesquisaFornecedor.value = "";
         produtosPorFiltro.value = "";
-
     }
+
 </script>
 
 <template>
@@ -96,7 +116,11 @@ import Cabecalho from '../Components/Cabecalho.vue';
             <a href="/produtos" class="opcoes">Produtos</a>
             <a href="/fornecedores" class="opcoes">Fornecedores</a>
         </div>
-        <a href="/login" class="opcoes">Login</a>
+
+        <div @click="authAction" class="opcoes">
+            <i class="fa-solid fa-user"></i>
+            <a>{{ authText }}</a>
+        </div>
     </div>
 
 <!-- body -->
@@ -116,20 +140,22 @@ import Cabecalho from '../Components/Cabecalho.vue';
                 
                 <div class="filtro-conteudo">
                     <label for="Preco">Preço</label>
-                    <input 
-                    type="text" 
-                    id="preco_min"
-                    name="preco_min"
-                    placeholder="Min"
-                    v-model="precoMin"
-                    >
-                    <input 
-                    type="text" 
-                    id="preco_max"
-                    name="preco_max"
-                    placeholder="Max"
-                    v-model="precoMax"
-                    >
+                    <div>
+                        <input 
+                        type="text" 
+                        id="preco_min"
+                        name="preco_min"
+                        placeholder="Min"
+                        v-model="precoMin"
+                        >
+                        <input 
+                        type="text" 
+                        id="preco_max"
+                        name="preco_max"
+                        placeholder="Max"
+                        v-model="precoMax"
+                        >
+                    </div>
                 </div> 
                 <button type="submit" @click="limparFiltro">Limpar Filtro</button>
                 <button type="submit" @click="filtrarProdutos">Filtrar</button>
@@ -279,12 +305,20 @@ import Cabecalho from '../Components/Cabecalho.vue';
     padding: 5px;
     border: 2px solid #dfdfdf;
     width: 150px;
+    margin: 2px;
+}
+
+.filtro-conteudo label {
+    display: inline-block;
+    margin-bottom: 4px;
+    font-size: 12px;
+    font-weight: bolder;
 }
 
 .filtro button {
     background-color: #040491;
     color: #fff;
-    width: 30%;
+    width: 20%;
     padding: 5px;
     border-radius: 8px;
     margin-top: 14px;

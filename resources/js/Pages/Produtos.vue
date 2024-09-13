@@ -39,7 +39,7 @@ import Cabecalho from '../Components/Cabecalho.vue';
             }
 
         } catch (error){
-            alert('Erro ao salvar o produto!');
+            alert('Usuário não autenticado!');
         }
     }
 
@@ -59,7 +59,7 @@ import Cabecalho from '../Components/Cabecalho.vue';
                 alert(response.data.message);
             }
         }catch (error){
-            alert('Erro ao alterar o produto!');
+            alert('Usuário não autenticado!');
         }
     }
 
@@ -88,7 +88,7 @@ import Cabecalho from '../Components/Cabecalho.vue';
 
 
         } catch (error){
-            alert('Erro ao deletar o produto!');
+            alert('Usuário não autenticado!');
         }
     }
 
@@ -177,7 +177,6 @@ import Cabecalho from '../Components/Cabecalho.vue';
                     placeholder="Digite o nome do produto" 
                     required
                     v-model="nomeProduto">
-                    <a>Aqui vai a mensagem de erro...</a>
                 </div>
 
                 <div class="form-content">
@@ -189,7 +188,6 @@ import Cabecalho from '../Components/Cabecalho.vue';
                     placeholder="Digite a descrição do produto" 
                     required
                     v-model="descricaoProduto">
-                    <a>Aqui vai a mensagem de erro...</a>
                 </div>
 
                 <div class="form-content">
@@ -202,7 +200,6 @@ import Cabecalho from '../Components/Cabecalho.vue';
                     placeholder="Digite o preço" 
                     required
                     v-model="precoProduto">
-                    <a>Aqui vai a mensagem de erro...</a>
                 </div>
 
                 <div class="form-content">
@@ -214,7 +211,6 @@ import Cabecalho from '../Components/Cabecalho.vue';
                     placeholder="Código" 
                     required
                     v-model="codigoFornecedor">
-                    <a>Aqui vai a mensagem de erro...</a>
                 </div>
 
                 <button type="submit">Salvar</button>
@@ -241,7 +237,6 @@ import Cabecalho from '../Components/Cabecalho.vue';
                         placeholder="Código" 
                         required
                         v-model="codigoProduto">
-                    <a>Aqui vai a mensagem de erro...</a>
                 </div>    
 
                 <div class="form-content">
@@ -253,7 +248,6 @@ import Cabecalho from '../Components/Cabecalho.vue';
                         placeholder="Novo nome" 
                         required
                         v-model="nomeProduto">
-                    <a>Aqui vai a mensagem de erro...</a>
                 </div>
 
                 <div class="form-content">
@@ -265,7 +259,6 @@ import Cabecalho from '../Components/Cabecalho.vue';
                         placeholder="Nova descrição" 
                         required
                         v-model="descricaoProduto">
-                    <a>Aqui vai a mensagem de erro...</a>
                 </div>
 
                 <div class="form-content">
@@ -278,7 +271,6 @@ import Cabecalho from '../Components/Cabecalho.vue';
                         placeholder="Novo preço" 
                         required
                         v-model="precoProduto">
-                    <a>Aqui vai a mensagem de erro...</a>
                 </div>
 
                 <button type="submit">Alterar</button>
@@ -303,7 +295,6 @@ import Cabecalho from '../Components/Cabecalho.vue';
                         placeholder="Código" 
                         required
                         v-model="codigoProduto">
-                    <a>Aqui vai a mensagem de erro...</a>
                 </div>    
 
                 <div class="form-content">
@@ -314,7 +305,6 @@ import Cabecalho from '../Components/Cabecalho.vue';
                         name="nome"
                         v-model="nomeProduto" 
                         >
-                    <a>Aqui vai a mensagem de erro...</a>
                 </div>
                 <button type="submit">Deletar</button>
 

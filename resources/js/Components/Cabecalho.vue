@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import axios from 'axios';
     
     defineOptions({
@@ -8,6 +8,7 @@ import axios from 'axios';
 
     const pesquisaProdutos = ref([]); 
     const pesquisa = ref('');  
+    const estaAutenticado = ref(false);
 
     async function listarProdutos(){
         try{
@@ -23,6 +24,25 @@ import axios from 'axios';
         }
     }
 
+    //Login / Logout
+
+    axios.get('api/auth/check').then(response => {
+        estaAutenticado.value = response.data.authenticated;
+    });
+
+    const authText = computed(() => estaAutenticado.value ? 'Logout' : 'Login');
+    
+    const authAction = () => {
+        if(estaAutenticado.value){
+            axios.post('/api/logout').then(() => {
+                estaAutenticado.value = false;
+                alert('Logout realizado!');
+            });
+        } else {
+            window.location.href = '/login';
+        }
+    }
+
 </script>
 
 <template>
@@ -33,6 +53,12 @@ import axios from 'axios';
             <a href="/produtos" class="opcoes">Produtos</a>
             <a href="/fornecedores" class="opcoes">Fornecedores</a>
         </div>
+
+        <div @click="authAction" class="opcoes auth">
+            <i class="fa-solid fa-user"></i>
+            <a>{{ authText }}</a>
+        </div>
+
     </div>
 </template>
 

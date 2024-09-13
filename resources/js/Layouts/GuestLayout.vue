@@ -18,3 +18,9 @@ import { Link } from '@inertiajs/vue3';
         </div>
     </div>
 </template>
+
+<style scoped>
+    .min-h-screen {
+        background-color: #04049E;
+    }
+</style>

@@ -36,7 +36,7 @@ import Cabecalho from '../Components/Cabecalho.vue';
             }
 
         } catch (error){
-            alert('Erro ao salvar o fornecedor!', error);
+            alert('Usuário não autenticado!', error);
         }
     }
 
@@ -55,7 +55,7 @@ import Cabecalho from '../Components/Cabecalho.vue';
             }
 
         } catch (error){
-            alert('Erro ao alterar o fornecedor!');
+            alert('Usuário não autenticado!');
         }
     }
 
@@ -81,7 +81,7 @@ import Cabecalho from '../Components/Cabecalho.vue';
                 alert(response.data.message);
             }
         } catch (error){
-            alert('Erro ao deletar o fornecedor!');
+            alert('Usuário não autenticado!');
         }
     }
 
@@ -91,7 +91,7 @@ import Cabecalho from '../Components/Cabecalho.vue';
             const response = await axios.get('/api/fornecedores');
             fornecedores.value = response.data;
         } catch (error){
-            alert('Erro ao buscar a lista de fornecedores!');
+            alert('Usuário não autenticado!');
         }
     }
 
@@ -110,7 +110,7 @@ import Cabecalho from '../Components/Cabecalho.vue';
                     }
 
             } catch (error){
-                console.log('Dando erro')
+                console.log('Erro ao buscar fornecedor')
             }
     }
 

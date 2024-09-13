@@ -26,9 +26,11 @@ const form = useForm({
 const submit = async () => {  
     try{
         await form.post(route('login'), {
-            onFinish: () => form.reset('password'),
+            onFinish: () => {
+                form.reset('password');
+                window.location.href = '/';
+            }
         });
-
     } catch (error) {
         console.error('Erro ao fazer login:', error);
     }
@@ -71,7 +73,7 @@ const logout = async () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                <InputLabel for="password" value="Senha" />
 
                 <TextInput
                     id="password"
@@ -88,23 +90,39 @@ const logout = async () => {
             <div class="block mt-4">
                 <label class="flex items-center">
                     <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ms-2 text-sm text-gray-600">Remember me</span>
+                    <span class="ms-2 text-sm text-gray-600">Lembrar de mim</span>
                 </label>
             </div>
-
+            
+            
             <div class="flex items-center justify-end mt-4">
                 <Link
-                    v-if="canResetPassword"
-                    :href="route('password.request')"
-                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                v-if="canResetPassword"
+                :href="route('password.request')"
+                class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                    Forgot your password?
-                </Link>
+                Esqueceu sua senha ?
+            </Link>
+            
+            
+            <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Logar
+                    </PrimaryButton>
+                    </div>
+                    </form>
 
-                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Log in
-                </PrimaryButton>
-            </div>
-        </form>
+                    <div class="registrar">
+                        <a href="/register">Registrar</a>
+                    </div>
     </GuestLayout>
 </template>
+
+<style scoped>
+.registrar{
+    text-decoration-line: underline;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: rgb(75 85 99)
+}
+
+</style>
