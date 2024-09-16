@@ -24,40 +24,53 @@ import Cabecalho from '../Components/Cabecalho.vue';
 //Salvar fornecedor
     async function salvarFornecedor(){
         try{
-            const response = await axios.post('/api/salvar-fornecedor', {
+            const response = await axios.post('/api/store/fornecedor', {
                 codigo: codigoFornecedor.value,
                 nome: nomeFornecedor.value,
             });
 
-            if(response.data.sucess){
-                alert(response.data.message);
-            } else {
+            if(response.data.success){
                 alert(response.data.message);
             }
 
         } catch (error){
-            alert('Usuário não autenticado!', error);
-        }
+            if(error.response && error.response.data.errors){
+                let MensagemErro = '';
+                for(let key in error.response.data.errors){
+                    MensagemErro += error.response.data.errors[key].join(' ') + '\n';
+                }
+                alert(MensagemErro);
+            } else {
+                alert('Usuário não autenticado. Por favor, realize o login e tente novamente.');
+            }
+         }
     }
 
 //Alterar fornecedor
     async function alterarFornecedor(){
         try{
-            const response = await axios.post('/api/alterar-fornecedor', {
+            const response = await axios.post('/api/alter/fornecedor', {
                 codigo: codigoFornecedor.value,
                 nome: nomeFornecedor.value
             });
 
-            if(response.data.sucess){
+            if(response.data.success){
                 alert(response.data.message);
-            } else {
-                alert(response.data.message);
-            }
+            } 
 
         } catch (error){
-            alert('Usuário não autenticado!');
-        }
+            if(error.response && error.response.data.errors){
+                let MensagemErro = '';
+                for(let key in error.response.data.errors){
+                    MensagemErro += error.response.data.errors[key].join(' ') + '\n';
+                }
+                alert(MensagemErro);
+            } else {
+                alert('Usuário não autenticado. Por favor, realize o login e tente novamente.');
+            }
+         }
     }
+    
 
 //Deletar fornecedor
     async function deletarFornecedor(){
@@ -71,17 +84,23 @@ import Cabecalho from '../Components/Cabecalho.vue';
         }
 
         try{
-            const response = await axios.post('/api/deletar-fornecedor', {
+            const response = await axios.post('/api/delete/fornecedor', {
                 codigo: codigoFornecedor.value
             });
 
-            if(response.data.sucess){
+            if(response.data.success){
                 alert(response.data.message);
-            } else {
-                alert(response.data.message);
-            }
+            } 
         } catch (error){
-            alert('Usuário não autenticado!');
+            if(error.response && error.response.data.errors){
+                let MensagemErro = '';
+                for(let key in error.response.data.errors){
+                    MensagemErro += error.response.data.errors[key].join(' ') + '\n';
+                }
+                alert(MensagemErro);
+            } else {
+                alert('Usuário não autenticado. Por favor, realize o login e tente novamente.');
+            }
         }
     }
 
