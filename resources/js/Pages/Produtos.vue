@@ -24,7 +24,7 @@ import Cabecalho from '../Components/Cabecalho.vue';
 //Salvar um novo produto
     async function salvarProduto(){
         try{
-                const response = await axios.post('/api/salvar-produto', {
+                const response = await axios.post('/api/store/produto', {
                 codigo: codigoProduto.value,
                 nome: nomeProduto.value,
                 descricao: descricaoProduto.value,
@@ -32,34 +32,46 @@ import Cabecalho from '../Components/Cabecalho.vue';
                 codigo_fornecedor: codigoFornecedor.value
             });
 
-            if(response.data.succes){
+            if(response.data.success){
                 alert(response.data.message);
-            } else {
-                alert(response.data.message);
-            }
+            } 
 
         } catch (error){
-            alert('Usuário não autenticado!');
-        }
+            if(error.response && error.response.data.errors){
+                let MensagemErro = '';
+                for(let key in error.response.data.errors){
+                    MensagemErro += error.response.data.errors[key].join(' ') + '\n';
+                }
+                alert(MensagemErro);
+            } else {
+                alert('Usuário não autenticado. Por favor, realize o login e tente novamente.');
+            }
+         }
     }
 
 //Alterar um produto existente
     async function alterarProduto(){
         try{
-            const response = await axios.post('/api/alterar-produto', {
+            const response = await axios.post('/api/alter/produto', {
                 codigo: codigoProduto.value,
                 nome: nomeProduto.value,
                 descricao: descricaoProduto.value,
                 preco: precoProduto.value
             });
 
-            if(response.data.succes){
+            if(response.data.success){
                 alert(response.data.message);
-            } else {
-                alert(response.data.message);
-            }
+            } 
         }catch (error){
-            alert('Usuário não autenticado!');
+            if(error.response && error.response.data.errors){
+                let MensagemErro = '';
+                for(let key in error.response.data.errors){
+                    MensagemErro += error.response.data.errors[key].join(' ') + '\n';
+                }
+                alert(MensagemErro);
+            } else {
+                alert('Usuário não autenticado. Por favor, realize o login e tente novamente.');
+            }
         }
     }
 
@@ -76,19 +88,24 @@ import Cabecalho from '../Components/Cabecalho.vue';
         }
 
         try{
-            const response = await axios.post('/api/deletar-produto', {
+            const response = await axios.post('/api/delete/produto', {
                 codigo: codigoProduto.value
             });
 
-            if(response.data.sucess){
-                alert(response.data.message);
-            }else {
+            if(response.data.success){
                 alert(response.data.message);
             }
 
-
         } catch (error){
-            alert('Usuário não autenticado!');
+            if(error.response && error.response.data.errors){
+                let MensagemErro = '';
+                for(let key in error.response.data.errors){
+                    MensagemErro += error.response.data.errors[key].join(' ') + '\n';
+                }
+                alert(MensagemErro);
+            } else {
+                alert('Usuário não autenticado. Por favor, realize o login e tente novamente.');
+            }
         }
     }
 

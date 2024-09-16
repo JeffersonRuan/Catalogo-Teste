@@ -19,22 +19,26 @@ Route::get('auth/check', function () {
 
 //Rotas protegidas
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/salvar-fornecedor', [FornecedorController::class, 'salvarFornecedor']);
-    Route::post('/alterar-fornecedor', [FornecedorController::class, 'alterarNomeFornecedor']);
-    Route::post('/deletar-fornecedor', [FornecedorController::class, 'deletarFornecedor']);
+    Route::post('/store/fornecedor', [FornecedorController::class, 'store']);
+    Route::post('/alter/fornecedor', [FornecedorController::class, 'alter']);
+    Route::post('/delete/fornecedor', [FornecedorController::class, 'delete']);
     Route::get('/fornecedores', [FornecedorController::class, 'getAllFornecedores']);
     
-    Route::post('/salvar-produto', [ProdutoController::class, 'salvarProduto']);
-    Route::post('/alterar-produto', [ProdutoController::class, 'alterarProduto']);
-    Route::post('/deletar-produto', [ProdutoController::class, 'deletarProduto']);
+    Route::post('/store/produto', [ProdutoController::class, 'store']);
+    Route::post('/alter/produto', [ProdutoController::class, 'alter']);
+    Route::post('/delete/produto', [ProdutoController::class, 'delete']);
 });
 
 //Fornecedor
 Route::get('/get-fornecedor', [FornecedorController::class, 'getFornecedor']);
 Route::get('/dados-fornecedor', [FornecedorController::class, 'getDadosFornecedor']);
 
+
+
+
 //Produto
 Route::get('/pesquisar-produtos', [ProdutoController::class, 'buscarProdutos']);
 Route::get('/produtos', [ProdutoController::class, 'getProdutos']);
 Route::get('/dados-produto', [ProdutoController::class, 'getDadosProduto']);
 Route::get('/filtro', [ProdutoController::class, 'buscarProdutosFiltro']);
+

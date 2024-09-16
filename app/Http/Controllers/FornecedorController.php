@@ -9,51 +9,63 @@ class FornecedorController extends Controller
 {
 
 //Salvar fornecedor no banco de dados
-    public function salvarFornecedor(Request $request){
-    
+    public function store(Request $request) {
+
+        $validated = $request->validate([
+            'codigo' => 'required|integer|unique:fornecedores,codigo',
+            'nome' => 'required|string|max:255'
+        ], [
+            'codigo.unique' => 'O código já foi utilizado por outro fornecedor'
+        ]);
+
         $fornecedor = new Fornecedor;
+        $fornecedor->codigo = $validated['codigo'];
+        $fornecedor->nome = $validated['nome'];
+        $fornecedor->save();
 
-        if(!Fornecedor::find($request->codigo)){
-            $fornecedor->codigo = $request->codigo;
-            $fornecedor->nome = $request->nome;
-            $fornecedor->save();
-
-            return response()->json(['success' => true, 'message' => 'Fornecedor salvo com sucesso!']);
-
-        } else{
-            return response()->json(['success' => false, 'message' => 'Código do fornecedor já exisite no banco de dados!']);
-        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Fornecedor salvo'
+        ]);
     }
 
 //Alterar nome do fornecedor no banco
-    public function alterarNomeFornecedor(Request $request){
+    public function alter(Request $request) {
 
-        $fornecedor = Fornecedor::find($request->codigo);
-        
-        if($fornecedor){
-            $fornecedor->nome = $request->nome;
-            $fornecedor->save();
+        $validated = $request->validate([
+            'codigo' => 'required|exists:fornecedores,codigo',
+            'nome' => 'required|string|max:255'
+        ], [
+            'codigo.exists' => 'O fornecedor selecionado é inválido ou não existe no sistema'
+        ]);
 
-            return response()->json(['success' => true, 'message' => 'Fornecedor alterado!']);
+        $fornecedor = Fornecedor::find($validated['codigo']);
+        $fornecedor->nome = $validated['nome'];
+        $fornecedor->save();
 
-        } else {
-            return response()->json(['success' => false, 'message' => 'O código informado não existe!']);
-        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Fornecedor alterado!'
+        ]);
     }
 
 //Deletar fornecedor no banco    
-    public function deletarFornecedor(Request $request){
+    public function delete(Request $request) {
+        
+        $validated = $request->validate([
+            'codigo' => 'required|exists:fornecedores,codigo'
+        ], [
+            'codigo.exists' => 'O fornecedor selecionado é inválido ou não existe no sistema'
+        ]);
 
-        $fornecedor = Fornecedor::find($request->codigo);
+        $fornecedor = Fornecedor::find($validated['codigo']);
+        $fornecedor->delete();
 
-        if($fornecedor){
-            $fornecedor->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'Fornecedor deletado'
+        ]);
 
-            return response()->json(['success' => true, 'message' => 'Fornecedor deletado com sucesso!']);
-
-        } else {
-            return response()->json(['success' => false, 'message' => 'O código informado não existe!']);
-        }
     }
 
 //Buscar todos os fornecedores do banco

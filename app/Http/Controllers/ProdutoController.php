@@ -9,71 +9,77 @@ use App\Models\Fornecedor;
 
 class ProdutoController extends Controller
 {
-    
+
 //Criar um novo produto na tabela
-    public function salvarProduto(Request $request){
+    public function store(Request $request){
 
-        $codigo = $request->codigo;
-        $codigoFornecedor = $request->codigo_fornecedor;
-
-        $produtoExistente = Produto::where('codigo', $codigo)->exists();
-
-        $fornecedorExistente = Fornecedor::where('codigo', $codigoFornecedor)->exists();
+        $validated = $request->validate([
+            'codigo' => 'required|integer|unique:produtos,codigo',
+            'nome' => 'required|string|max:255',
+            'descricao' => 'nullable|string',
+            'preco' => 'required|numeric|min:0',
+            'codigo_fornecedor' => 'required|exists:fornecedores,codigo',
+        ],[
+            'codigo.required' => 'O campo código é obrigatório',
+            'codigo.unique' => 'O código já foi utilizado por outro produto',
+            'codigo_fornecedor.required' => 'O campo código do fornecedor é obrigatório',
+            'codigo_fornecedor.exists' => 'O fornecedor selecionado é inválido ou não existe no sistema'
+        ]);
 
         $produto = new Produto;
+        $produto->codigo = $validated['codigo'];
+        $produto->nome = $validated['nome'];
+        $produto->descricao = $validated['descricao'];
+        $produto->preco = $validated['preco'];
+        $produto->codigo_fornecedor = $validated['codigo_fornecedor'];
+        $produto->save();
 
-        if (!$produtoExistente && $fornecedorExistente) {
-            
-            $produto->codigo = $request->codigo;
-            $produto->nome = $request->nome;
-            $produto->descricao = $request->descricao;
-            $produto->preco = $request->preco;
-            $produto->codigo_fornecedor = $request->codigo_fornecedor;
-            $produto->save();
-
-            return response()->json(['success' => true, 'message' => 'Produto salvo com sucesso!']);
-
-        } else {
-            if ($produtoExistente) {
-                return response()->json(['success' => false, 'message' => 'Código do produto já existe no banco de dados!']);
-
-            } elseif (!$fornecedorExistente) {
-                return response()->json(['success' => false, 'message' => 'Fornecedor não exisite no banco de dados!']);
-
-            }
-        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Produto salvo com sucesso!'
+        ]);
     }
-
-
+    
 //Alterar Produto
-    public function alterarProduto(Request $request){
+    public function alter(Request $request){
 
-        $produto = Produto::find($request->codigo);
+        $validated = $request->validate([
+            'codigo' => 'required|exists:produtos,codigo',
+            'nome' => 'required|string|max:255',
+            'descricao' => 'nullable|string',
+            'preco' => 'required|numeric|min:0',
+        ], [
+            'codigo.exists' => 'O produto selecionado é inválido ou não existe no sistema'
+        ]);
 
-        if($produto){
-            $produto->nome = $request->nome;
-            $produto->descricao = $request->descricao;
-            $produto->preco = $request->preco;
-            $produto->save();
+        $produto = Produto::find($validated['codigo']);
+        $produto->nome = $validated['nome'];
+        $produto->descricao = $validated['descricao'];
+        $produto->preco = $validated['preco'];
+        $produto->save();
 
-            return response()->json(['success' => true, 'message' => 'Produto alterado!']);
-
-        } else {
-            return response()->json(['success' => false, 'message' => 'Código do produto não existe!']);
-        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Produto alterado!'
+        ]);
     }
 
 //Deletar Produto
-    public function deletarProduto(Request $request){
+    public function delete(Request $request) {
 
-        $produto = Produto::find($request->codigo);
+        $validated = $request->validate([
+            'codigo' => 'required|exists:produtos,codigo'
+        ],[
+            'codigo.exists' => 'O produto selecionado é inválido ou não existe no sistema'
+        ]);
 
-        if($produto){
-            $produto->delete();
-            return response()->json(['success' => true, 'message' => 'Produto deletado!']);
-        } else {
-            return response()->json(['success' => false, 'message' => 'Código do produto não existe!']);
-        }
+        $produto = Produto::find($validated['codigo']);
+        $produto->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Produto deletado'
+        ]);
     }
 
 //Buscar produtos por codigo ou nome
@@ -91,7 +97,6 @@ class ProdutoController extends Controller
             }
         }
 
-        // $produtos = Produto::where('nome', 'like', '%' . $nome . '%')->get();
         $produtos = $query->get();
 
         if($produtos->isNotEmpty()){
