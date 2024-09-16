@@ -182,7 +182,6 @@ import Cabecalho from '../Components/Cabecalho.vue';
                     required
                     v-model="codigoProduto"
                     >
-                    <a>Aqui vai a mensagem de erro...</a>
                 </div>    
 
                 <div class="form-content">

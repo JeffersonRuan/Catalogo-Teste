@@ -117,15 +117,6 @@
     border: 2px solid #dfdfdf;
 }
 
-
-
-.form-content a{
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    visibility: hidden;
-}
-
 .form button {
     background-color: #040491;
     color: #fff;
@@ -134,12 +125,4 @@
     border-radius: 8px;
     margin-top: 14px;
     align-self: center;
-}
-
-.form-content.error input{
-    border-color: #ff3b25;
-}
-
-.form-content.error a{
-    color: #ff3b25;
 }

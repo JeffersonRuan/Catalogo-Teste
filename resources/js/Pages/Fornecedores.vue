@@ -17,7 +17,6 @@ import Cabecalho from '../Components/Cabecalho.vue';
     const ativarAlterFornecedor = ref(false);
     const ativarDeleteFornecedor = ref(false);
     const ativarListaFornecedor = ref(false);
-    const token = localStorage.getItem('authToken');
 
 //Funções
 
@@ -188,7 +187,6 @@ import Cabecalho from '../Components/Cabecalho.vue';
                 placeholder="Código" 
                 required
                 v-model="codigoFornecedor">
-                <a>Aqui vai a mensagem de erro...</a>
             </div>
 
             <div class="form-content">
@@ -200,7 +198,6 @@ import Cabecalho from '../Components/Cabecalho.vue';
                 placeholder="Digite o nome do fornecedor" 
                 required
                 v-model="nomeFornecedor">
-                <a>Aqui vai a mensagem de erro...</a>
             </div>
 
             <button type="submit">Salvar</button>
@@ -225,7 +222,6 @@ import Cabecalho from '../Components/Cabecalho.vue';
                     placeholder="Código" 
                     required
                     v-model="codigoFornecedor">
-                    <a>Aqui vai a mensagem de erro...</a>
                 </div>
 
                 <div class="form-content">
@@ -237,7 +233,6 @@ import Cabecalho from '../Components/Cabecalho.vue';
                     placeholder="Novo nome" 
                     required
                     v-model="nomeFornecedor">
-                    <a>Aqui vai a mensagem de erro...</a>
                 </div>
 
                 <button type="submit">Alterar</button>
@@ -262,7 +257,6 @@ import Cabecalho from '../Components/Cabecalho.vue';
                     placeholder="Código" 
                     required
                     v-model="codigoFornecedor">
-                    <a>Aqui vai a mensagem de erro...</a>
                 </div>
 
                 <div class="form-content">
@@ -273,7 +267,6 @@ import Cabecalho from '../Components/Cabecalho.vue';
                     name="nome" 
                     v-model="nomeFornecedor"
                     >
-                    <a>Aqui vai a mensagem de erro...</a>
                 </div>
 
                 <button type="submit">Deletar</button>
